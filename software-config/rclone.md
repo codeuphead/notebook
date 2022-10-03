@@ -2,9 +2,9 @@
 
 ## 安装
 
-`sudo -v ; curl https://rclone.org/install.sh | sudo bash`
+linux `sudo -v ; curl https://rclone.org/install.sh | sudo bash`
 
-windows 直接下载 `https://downloads.rclone.org/v1.59.2/rclone-v1.59.2-windows-amd64.zip`
+windows `https://downloads.rclone.org/v1.59.2/rclone-v1.59.2-windows-amd64.zip`
 
 ## systemd 配置
 
@@ -37,8 +37,8 @@ WantedBy=default.target
 
 使用 nssm 进行配置，注意需要指定配置文件位置。
 
-path `C:\xxx\rclone.exe`
+path 项：`C:\xxx\rclone.exe`
 
-startup directory `xxx`
+startup directory 项：`C:\xxx\`
 
-arguments `mount --allow-non-empty --cache-dir "x:/x/jianguoyun" --vfs-cache-mode writes --vfs-cache-max-age 24h --vfs-cache-max-size 1G --buffer-size 128M --config C:\Users\xxx\AppData\Roaming\rclone\rclone.conf --log-file x:/temp/tmp.txt jianguoyun:/ "X:"
+arguments 项：`mount jianguoyun:/ X: --allow-non-empty --cache-dir x:/x/jianguoyun --vfs-cache-mode writes --vfs-cache-max-age 24h --vfs-cache-max-size 1G --buffer-size 128M --config C:\Users\xxx\AppData\Roaming\rclone\rclone.conf --log-file x:/temp/tmp.txt`

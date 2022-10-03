@@ -9,7 +9,7 @@
   - [忽略文件](#忽略文件)
   - [git 服务器](#git-服务器)
   - [pageant](#pageant)
-  - [gitolite](#gitolite)
+  - [ssh agent](#ssh-agent)
 
 ## 安装最新版 git
 
@@ -150,6 +150,22 @@ git clone git@server:/srv/sample.git
 环境变量添加 GIT_SSH 指定到 plink.exe
 可以令 VSCODE 等客户端通过 plink 使用 ssh key（ppk 格式的）
 
-## gitolite
+## ssh agent
 
-`useradd --system --shell /bin/bash --create-home git`
+先启动，再运行
+
+- macOS/Linux
+
+```bash
+eval ssh-agent
+ssh-add ~/.ssh/other_id_rsa
+```
+
+- 在Windows中的git-bash中
+
+```bash
+eval $(ssh-agent)
+ssh-add ~/.ssh/other_id_rsa
+```
+
+windows 配置 OpenSSH Authentication Agent 服务自动启动即可
