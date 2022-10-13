@@ -13,7 +13,7 @@
 
 Android 常用的解决方案是，使用注解（@inject），通过 annotation 和 abstractProcessor 编译时生成相关实现类，运行时动态注入。
 
-## DI 依赖注入 
+## DI 依赖注入
 
 Dependency Injection
 
