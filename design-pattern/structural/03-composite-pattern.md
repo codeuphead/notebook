@@ -1,8 +1,61 @@
 # Composite 模式
 
-## 容器与内容的一致性
-
 能够使容器与内容具有一致性，创造出递归结构的模式
+
+## 类图
+
+```mermaid
+classDiagram
+    class Client{
+
+    }
+    class Component{
+        add(Component child)
+        remove(Component child)
+        getChild() List~Component~
+        method1()
+        method2()
+    }
+    class Leaf{
+        method1();
+        method2();
+    }
+    class Composite{
+        Component children
+        add(Component child)
+        remove(Component child)
+        getChild() List~Component~
+        method1()
+        method2()
+    }
+    Client --> Component : use
+    Component <|-- Leaf
+    Component <|-- Composite
+    Component --o Composite
+```
+
+- Leaf：表示**内容**角色，该角色不能放入其他对象。
+- Composite：表示**容器**的角色，可以在其中放入 Leaf 和 Composite 角色。
+- Component：使 Leaf 和 Composite 具有一致性的角色，是他们的父类。
+- Client：使用 Composite 模式的角色。
+
+## 要点
+
+- 多个和单个的一致性，可以使容器与内容具有一致性。将多个对象结合在一起，当作一个对象处理。
+- Add 方法应该放在哪里？
+  - 定义在 Component 中，报错，只有 Composite 需要实现。
+  - 定义在 Component 中，什么都不做，只有 Composite 需要实现。
+  - 声明在 Component 中，定义为抽象方法但不实现，由子类判断。
+  - 只定义在 Directory 中，处理数据时需要进行转型。
+- 递归结构：树结构的数据结构都适用 Composite 模式。
+
+## 相关设计模式
+
+- Command 模式：Command 模式编写宏命令时使用了 Composite 模式。
+- Visitor 模式：可以用 Visitor 模式访问 Composite 模式中的递归结构。
+- Decorator 模式：该模式使装饰框和内容具有一致性；本模式通过 Component 使容器和内容具有一致性。
+
+## 代码
 
 ```java
 public abstract class Entry {
@@ -114,51 +167,3 @@ public class Main {
     }
 }
 ```
-
-## 角色
-
-- Leaf
-
-表示“内容”角色，该角色不能放入其他对象
-
-- Composite
-
-表示容器的角色，可以在其中放入 Leaf 和 Composite 角色
-
-- Component
-
-使 Leaf 和 Composite 具有一致性的角色，使他们的父类
-
-- Client
-
-使用 Composite 模式的角色
-
-## 要点
-
-- 多个和单个的一致性
-
-将多个对象结合在一起，当作一个对象处理
-
-- Add 方法
-  - 定义在 Entry 中，报错。需要实现的类进行重写
-  - 定义在 Entry 中，什么都不做，需要实现的类进行重写
-  - 声明在 Entry 中，但不实现
-  - 只定义在 Directory 中，需要进行转型
-
-- 递归结构
-
-树结构的数据结构都适用 Composite 模式
-
-## 相关
-
-- Command 模式
-
-适用 Command 模式编写宏命令时使用了 Composite 模式
-
-- Visitor 模式
-
-可以用 Visitor 模式访问 Composite 模式中的递归结构
-
-- Decorator 模式
-
-该模式使装饰框和内容具有一致性；本模式通过 Component 使容器和内容具有一致性

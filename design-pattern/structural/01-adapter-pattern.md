@@ -2,12 +2,12 @@
 
 可以有两种实现方式：
 
-1. 类适配器模式（使用继承的适配器）
-1. 对象适配器模式（使用委托的适配器）
+1. 类适配器模式（使用继承的适配器）。
+1. 对象适配器模式（使用委托的适配器）。
 
 ## 类图
 
-类适配器模式
+- 类适配器模式
 
 ```mermaid
 classDiagram
@@ -28,7 +28,7 @@ classDiagram
     Adapter --|> Adapee
 ```
 
-对象适配器模式
+- 对象适配器模式
 
 ```mermaid
 classDiagram
@@ -52,7 +52,7 @@ classDiagram
 - Target：负责定义所需方法，通常由接口或者抽象类担任。
 - Client：负责使用 Target 角色定义的方法进行具体处理。
 - Adaptee：被适配者，持有既定方法的角色，需要通过适配器进行适配供 Client 使用。
-- Adapter：使用 Adaptee 角色的方法来满足 Target 的需求。通过继承或聚合来使用 Adaptee 角色
+- Adapter：使用 Adaptee 角色的方法来满足 Target 的需求。通过继承或聚合来使用 Adaptee 角色。
 
 ## 要点
 
@@ -63,7 +63,7 @@ classDiagram
 
 ## 相关设计模式
 
-- Bridge 模式：Bridge 模式用于连接类的功能层次结构与实现层次结构。Adapter 模式用于连接 API 不同的类
+- Bridge 模式：Bridge 模式用于连接类的功能层次结构与实现层次结构。Adapter 模式用于连接 API 不同的类。
 - Decorator 模式：Decorator 模式是在不改变 API 的前提下，增加功能。Adapter 用于填补不同 API 之间的缝隙。
 
 ## 代码
