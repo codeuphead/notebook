@@ -1,4 +1,4 @@
-# 用户
+# Linux User
 
 ```
 adduser xxx
