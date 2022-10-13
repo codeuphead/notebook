@@ -1,6 +1,53 @@
 # Decorator 模式
 
-## 装饰边框与装饰物的一致性
+装饰边框与装饰物的一致性。
+
+不断地为对象添加装饰。
+
+## 类图
+
+```mermaid
+classDiagram
+    class Component{
+        <<interface>>
+        method()
+    }
+    class ConcreteComponent{
+        method()
+    }
+    class Decorator{
+        <<interface>>
+        Component component
+    }
+    class ConcreteDecorator{
+        method()
+    }
+    Component <|.. ConcreteComponent
+    Component <|.. Decorator
+    Decorator <|.. ConcreteDecorator
+    Decorator o-- Component
+```
+
+- Component：增加功能时的核心角色，定义功能接口。
+- ConcreteComponent：该角色实现了 Component 所定义的接口。
+- Decorator：该角色实现了 Component 定义的接口，在它内部保存了被装饰的对象 Component 角色。
+- ConcreteCDecorator：具体的 Decorator 角色，实现了 Decorator 定义的接口。
+
+## 要点
+
+- 接口的透明性：装饰边框与被装饰物具有一致性。
+- 与 Composite 模式不同，本模式主要是通过添加装饰物来增加对象的功能，虽然他们都有递归结构。
+- 在不改变被装饰物的前提下增加功能。
+- 可以动态的增加功能。
+- 只需要一些装饰物即可添加许多功能。
+- 导致增加许多很小的类，功能类似。
+
+## 相关设计模式
+
+- Adapter 模式：Adapter 模式用于适配两个不同的接口；Decorator 模式可以在不改变被装饰物的接口的前提下，为被装饰物添加边框。
+- Strategy 模式：Strategy 模式是通过整体地替换算法来改变类的功能；Decorator 模式通过改变被装饰物的边框或者为被装饰物添加多重边框，来增加类的功能。
+
+## 代码
 
 ### Java
 
@@ -113,55 +160,3 @@ fun main() {
     }
 }
 ```
-
-## 角色
-
-- Component
-
-增加功能时的核心角色
-
-- ConcreteComponent
-
-该角色实现了 Component 角色所定义的接口
-
-- Decorator
-
-该角色由于 Component 相同的接口，在它内部保存了被装饰的对象——Component 角色
-
-- ConcreteCDecorator
-
-具体的 Decorator 角色
-
-## 要点
-
-- 接口的透明性
-
-装饰边框与被装饰物具有一致性，示例中表现为，Border 类是 Display 的子类，体现了他们的一致性。这样即使被装饰物被装饰起来，接口也不会被隐藏起来，其他类依然可以调用其接口。与 Composite 模式不同，本模式主要是通过添加装饰物来增加对象的功能
-
-- 在不改变被装饰物的前提下增加功能
-
-虽然接口相同，但是越装饰，功能越多，实现不改变被装饰物的前提下，增加功能
-
-Decorator 模式使用了委托
-
-- 可以动态的增加功能
-
-因为使用了委托，类之间形成了弱关系，因此不用改变框架代码，就可以生成一个与其他对象具有不同关系的新对象
-
-- 只需要一些装饰物即可添加许多功能
-
-Decorator 可以将各种功能自由组合成新的对象
-
-- java.io 包 javax.swing.border 都使用了Decorator 模式
-
-- 导致增加许多很小的类，功能类似
-
-## 相关
-
-- Adapter 模式
-
-此模式用于适配两个不同的接口；本模式可以在不改变被装饰物的接口的前提下，为被装饰物添加边框
-
-- Strategy 模式
-
-此模式是通过整体地替换算法来改变类的功能；本模式通过改变被装饰物的边框或者为被装饰物添加多重边框，来增加类的功能

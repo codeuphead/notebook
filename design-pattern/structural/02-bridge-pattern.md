@@ -13,6 +13,7 @@ Bridge 模式就是将两个层次分离为独立的类层次结构，并搭建�
 ```mermaid
 classDiagram
     class Abstraction{
+        <<interface>>
         impl
         method1()
         method2()
@@ -22,6 +23,7 @@ classDiagram
         refinedMethodB()
     }
     class Implementor{
+        <<interface>>
         implMethodX()
         implMethody()
     }

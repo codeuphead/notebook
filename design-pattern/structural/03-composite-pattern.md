@@ -10,6 +10,7 @@ classDiagram
 
     }
     class Component{
+        <<interface>>
         add(Component child)
         remove(Component child)
         getChild() List~Component~
@@ -29,8 +30,8 @@ classDiagram
         method2()
     }
     Client --> Component : use
-    Component <|-- Leaf
-    Component <|-- Composite
+    Component <|.. Leaf
+    Component <|.. Composite
     Component --o Composite
 ```
 
