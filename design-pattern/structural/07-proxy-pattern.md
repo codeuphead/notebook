@@ -1,6 +1,46 @@
 # Proxy 模式
 
-## 只在必要时生成实例
+## 类图
+
+```mermaid
+classDiagram
+    class Subject{
+        <<interface>>
+        method()
+    }
+    class RealSubject{
+        method()
+    }
+    class Proxy{
+        method()
+    }
+    class Client{
+
+    }
+    Subject <|.. Proxy
+    Subject <|.. RealSubject
+    Client --> Subject : use
+    Proxy o-- RealSubject    
+```
+
+- Subject：定义了使 Proxy 角色 和 RealSubject 角色之间具有一致性的接口，因此 Client 不必关心究竟使用的使 Proxy 还是 RealSubject。
+- Proxy：角色会尽量处理来自 Client 角色的请求，只有当自己不能处理时，才会将工作交给 RealSubject 角色。只有在必要时才会生成 RealSubject 角色。Proxy 角色实现了 Subject 定义的接口。
+- RealSubject：在 Proxy 角色无法胜任工作的时候出场，实现了 Subject 定义的接口。
+- Client：使用 Proxy 模式的角色。
+
+## 要点
+
+- 使用代理人来提升处理速度。
+- 有必要划分代理人和本人，可以独立成组件，修改使不会相互影响。
+- 代理与委托，代理中遇到无法处理的问题，就会通过委托的方式进行处理。
+- 透明性，使用接口 Printable 对于 Client。
+
+## 相关设计模式
+
+- Adapter 模式：Adapter 适配了两种不同接口的对象，使他们可以一同工作；Proxy 与 RealSubject 的接口使相同的。
+- Decorator 模式：两者实现上很相似，不过使用目的不同。Decorator 目的使增加新功能；Proxy 更注重通过代理人的方式来减轻本人的工作负担。
+
+## 代码
 
 ```java
 public class Printer implements Printable {
@@ -79,57 +119,3 @@ public class Main {
     }
 }
 ```
-
-## 角色
-
-- Subject
-
-角色定义了使 Proxy 角色 和 RealSubject 角色之间具有一致性的接口，因此 Client 不必关心究竟使用的使 Proxy 还是 RealSubject
-
-- Proxy
-
-角色会尽量处理来自 Client 角色的请求，只有当自己不能处理是，才会将工作交给 RealSubject 角色。只有在必要时才会生成 RealSubject 角色。Proxy 角色实现了 Subject 定义的接口
-
-- RealSubject
-
-在 Proxy 角色无法胜任工作的时候出厂，实现了 Subject 定义的接口
-
-- Client
-
-使用 Proxy 模式的角色
-
-## 要点
-
-- 使用代理人来提升处理速度
-
-- 有必要划分代理人和本人
-
-可以独立成组件，修改使不会相互影响
-
-- 代理与委托
-
-代理中遇到无法处理的问题，就会通过委托的方式进行处理
-
-- 透明性
-
-使用接口 Printable 对于 Client
-
-- 各种 Proxy 模式
-
-Virtual Proxy
-
-Remote Proxy
-
-Access Proxy
-
-## 相关
-
-- Adapter 模式
-
-Adapter 适配了两种不同接口的对象，使他们可以一同工作；Proxy 与 RealSubject 的接口使相同的
-
-- Decorator 模式
-
-两者实现上很相似，不过使用目的不同
-
-Decorator 目的使增加新功能；Proxy 更注重通过代理人的方式来减轻本人的工作负担

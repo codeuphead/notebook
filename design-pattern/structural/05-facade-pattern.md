@@ -1,8 +1,59 @@
 # Facade 模式
 
-## 简单窗口
+外观模式
 
-可以为相互关联在一起的错综复杂的类，整理出高层接口。Facade 角色可以让系统对外只有一个简单的接口，而且 Facade 角色还会考虑到系统内部各个类之间的责任关系和依赖关系，按照正确的顺序调用各个类
+可以为相互关联在一起的错综复杂的类，整理出高层接口。
+
+Facade 角色可以让系统对外只有一个简单的接口，而且 Facade 角色还会考虑到系统内部各个类之间的责任关系和依赖关系，按照正确的顺序调用各个类。
+
+## 类图
+
+```mermaid
+classDiagram
+    class Client{
+
+    }
+    class Facade{
+
+    }
+    class ClassA{
+
+    }
+    class ClassB{
+        
+    }
+    class ClassC{
+
+    }
+    class ClassD{
+
+    }
+    Client --> Facade : use
+    Facade --> ClassA
+    Facade --> ClassB
+    Facade --> ClassC
+    Facade --> ClassD
+    ClassB --> ClassC
+    ClassB <-- ClassC
+```
+
+- Facade：代表构成系统的许多其他角色的简单窗口，Facade 角色向系统外部提供高层接口。
+- 构成系统的其他角色：各自完成自己的工作，他们并不知道 Facade 角色。
+- Client：负责调用 Facade 角色。
+
+## 要点
+
+- Facade 角色的工作：让复杂的东西看起来简单。接口变少了，程序与外部的关联关系弱化了，更容易是我们的包作为组件复用。还需要考虑将那些方法、字段设为 public。如果公开的过多，会导致类的内部修改变得困难。
+- 递归使用 Facade 模式。
+- 开发人员不愿创建 Facade 的原因，是心里层面的，认为所有依赖、调用都记得，所以不去创建 Facade 角色。
+
+## 相关设计模式
+
+- Abstract Factory 模式：可以将此模式看作生成复杂实例时的 Facade 模式。
+- Singleton 模式：有时会使用 Singleton 模式创建 Facade 角色。
+- Mediator 模式：Facade 模式单方面使用其他角色来提供高层接口；Mediator 模式中，Mediator 角色作为 Colleague 角色间的仲裁者负责调停。Facade 模式是单向的，Mediator 角色是双向的。
+
+## 代码
 
 ```java
 public class Database {
@@ -75,41 +126,3 @@ public class Main {
     }
 }
 ```
-
-## 角色
-
-- Facade
-
-代表构成系统的许多其他角色的简单窗口，Facade 角色向系统外部提供高层接口
-
-- 构成系统的其他角色
-
-各自完成自己的工作，他们并不知道 Facade 角色
-
-- Client
-
-负责调用 Facade 角色
-
-## 要点
-
-- Facade 角色的工作
-
-让复杂的东西看起来简单。接口变少了，程序与外部的关联关系弱化了，更容易是我们的包作为组件复用
-
-还需要考虑将那些方法、字段设为 public。如果公开的过多，会导致类的内部修改变得困难
-
-- 递归使用 Facade 模式
-
-## 相关
-
-- Abstract Factory 模式
-
-可以将此模式看作生成复杂实例时的 Facade 模式。
-
-- Singleton 模式
-
-有时会使用 Singleton 模式创建 Facade 角色
-
-- Mediator 模式
-
-本模式单方面使用其他角色来提供高层接口；Mediator 模式中，Mediator 角色作为 Colleague 角色间的仲裁者负责调停。Facade 模式是单向的，Mediator 角色是双向的

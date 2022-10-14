@@ -1,8 +1,47 @@
 # Flyweight 模式
 
-## 共享对象，避免浪费
+享元模式
 
 通过尽量共享实例来避免 new 出实例
+
+## 类图
+
+```mermaid
+classDiagram
+    class Flyweight{
+        method()
+    }
+    class FlyweightFactory{
+        pool
+        getFlyweight() Flyweight
+    }
+    class Client{
+
+    }
+
+    Client --> FlyweightFactory : use
+    FlyweightFactory o-- Flyweight
+```
+
+- Flyweight：实例会被共享的类。
+- FlyweightFactory：生成 Flyweight 的工厂。
+- Client：使用 FlyweightFactory 生成 Flyweight。
+
+## 要点
+
+- 对多个地方产生影响：一个实例的改变会反映到所有使用该实例的地方。
+- Intrinsic Extrinsic：应当共享的信息被称作 Intrinsic 信息。不应当共享的信息被称作 Extrinsic 信息。
+- 不要让共享的实例被回收。
+
+## 相关设计模式
+
+- Proxy 模式：如果生成实例的处理需要花费较长实践，可以使用 Flyweight 模式来提高程序处理速度。
+- Composite 模式：有时可以是用 Flyweight 模式共享 Composite 模式中的 Leaf 角色。
+- Singleton 模式：在 Flyweight 角色中有时会使用 Singleton 模式。
+
+如果使用了 Singleton 模式，由于只会生成一个 Singleton 角色，因此所有使用该实例的地方都共享同一个实例。在 Singleton 实例中只持有 intrinsic 信息
+
+## 代码
 
 ```java
 public class BigChar {
@@ -89,45 +128,3 @@ public class Main {
     }
 }
 ```
-
-## 角色
-
-- Flyweight
-
-使用共享对象
-
-- FlyweightFactory
-
-生成 Flyweight 的工厂
-
-- Client
-
-请求者，使用 FlyweightFactory 生成 Flyweight
-
-## 要点
-
-- 对多个地方产生影响
-
-一个实例的改变会反映到所有使用该实例的地方
-
-- Intrinsic Extrinsic
-
-应当共享的信息被称作 Intrinsic 信息。不应当共享的信息被称作 Extrinsic 信息
-
-- 不要让共享的实例被回收
-
-## 相关
-
-- Proxy 模式
-
-如果生成实例的处理需要花费较长实践，可以使用 Flyweight 模式来提高程序处理速度
-
-- Composite 模式
-
-有时可以是用 Flyweight 模式共享 Composite 模式中的 Leaf 角色
-
-- Singleton 模式
-
-在 Flyweight 角色中有时会使用 Singleton 模式
-
-如果使用了 Singleton 模式，由于只会生成一个 Singleton 角色，因此所有使用该实例的地方都共享同一个实例。在 Singleton 实例中只持有 intrinsic 信息
