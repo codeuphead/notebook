@@ -1,8 +1,45 @@
 # 责任链模式
 
-将多个对象组成一条职责链，按照他们在职责链上的顺序一个一个的找出由谁来处理
+## 类图
 
-可以弱化请求方和处理放的关系，让双方都可以独立成为组件，还可以应对其他需求，如不同情况负责处理的对象变化的需求
+```mermaid
+classDiagram
+    class Handler{
+        Handler next
+        request()
+    }
+    class ConcreteHandler1{
+        request()
+    }
+    class ConcreteHandler2{
+        request()
+    }
+    class Client{
+
+    }
+    Client --> Handler: use
+    Handler o-- Handler
+    ConcreteHandler1 ..|> Handler
+    ConcreteHandler2 ..|> Handler
+```
+
+- Handler：定义了处理请求的接口。Handler 知道下一个处理者的是谁，如果自己无法处理，会交给下一个。
+- ConcreteHandler：处理请求的具体角色。
+- Client：向第一个 ConcreteHandler 发送请求的角色。
+
+## 要点
+
+- 弱化了发出请求的人和处理请求的人之间的关系。
+- 可以动态改变职责链。
+- 专注于自己的工作，无法处理传递出去。
+- 会有延迟。如果请求和处理者之间的关系时确定的，而且需要非常快的处理速度时，不使用本模式会更好。
+
+## 相关设计模式
+
+- Composite 模式：Handler 角色经常会使用 Composite 模式。
+- Command 模式：有时会使用 Command 模式向 Handler 角色发出请求。
+
+## 代码
 
 ```java
 public class Trouble {
@@ -117,41 +154,4 @@ public class Main {
         }
     }
 }
-
 ```
-
-## 角色
-
-- Handler
-
-定义了处理请求的接口。Handler 知道下一个处理者的是谁，如果自己无法处理，会交给下一个
-
-- ConcreteHandler
-
-- Client
-
-向第一个 ConcreteHandler 发送请求的角色
-
-## 要点
-
-- 弱化了发出请求的人和处理请求的人之间的关系
-
-- 可以动态改变职责链
-
-- 专注于自己的工作，无法处理传递出去
-
-如果不使用该模式，那么就需要编写一个“决定谁来处理”的方法，或者让每个 ConcreteHandler 自己负责任务分配的工作
-
-- 会有延迟
-
-如果请求和处理者之间的关系时确定的，而且需要非常快的处理速度时，不适用本模式会更好
-
-## 相关
-
-- Composite 模式
-
-Handler 角色经常会使用 Composite 模式
-
-- Command 模式
-
-有时会使用 Command 模式向 Handler 角色发出请求

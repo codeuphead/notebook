@@ -1,8 +1,54 @@
 # Command 模式
 
-## 命令也是类
+将请求转换为一个包含**与请求相关的所有信息**的独立对象。
 
-用类来表示“命令”，用对象表示我们没有意识到是“物”的东西
+该转换让你能根据不同的请求将**方法参数化**、**延迟请求执行**或将其**放入队列中**，且能实现可撤销操作。
+
+## 类图
+
+```mermaid
+classDiagram
+    class Invoker{
+        Command command
+        setConnmand()
+        executeCommand()
+    }
+    class Command{
+        <<interface>>
+        execute()
+    }
+    class ConcreteCommand{
+        Receiver receiver
+        params
+        execute()
+    }
+    class Receiver{
+        operation()
+    }
+    class Client{
+
+    }
+    Client ..> ConcreteCommand
+    Client --> Invoker
+    Client --> Receiver
+    ConcreteCommand ..|> Command
+    ConcreteCommand --> Receiver
+    Invoker --> Command
+```
+
+- Invoker：负责对请求进行初始化，必须包含一个成员变量来存储对于命令对象的引用。Invoker 会触发命令执行，而不向 Receiver 直接发送请求。Invoker 并不负责创建命令对象，它通常通过构造函数从 Client 处获得预先生成的命令。
+- Command：定义命令的接口。
+- ConcreteCommand：实现 Command 定义的接口。自身并不完成工作，而是会将调用委派给一个业务逻辑对象。接收对象执行方法所需的参数可以声明为具体命令的成员变量。 你可以将命令对象设为不可变， 仅允许通过构造函数对这些成员变量进行初始化。
+- Receiver：包含部分业务逻辑，接收命令的对象，自己会完成实际工作。
+- Client：生成 ConcreteCommand 并分配 Reciever。客户端必须将包括 Receiver 在内的所有请求参数传递给 Command 的构造函数。
+
+## 相关设计模式
+
+- Composite 模式：有时胡i使用 Composite 模式实现宏命令。
+- Memento 模式：有时会使用 Memento 模式来保存 Command 角色的历史记录。
+- Protoype 模式：有时会使用 Prototype 模式复制发生的事件。
+
+## 代码
 
 ```java
 public interface Command {
@@ -144,51 +190,3 @@ public class Main extends JFrame implements ActionListener, MouseMotionListener,
     }
 }
 ```
-
-## 角色
-
-- Command
-
-负责定义命令的接口
-
-- ConcreteCommand
-
-负责实现 Command 定义的接口
-
-- Receiver
-
-接收命令的对象
-
-- Client
-
-生成 ConcreteCommand 并分配 Reciever
-
-- Invoker
-
-开始执行命令的角色，它会调用 Command 中顶一个的接口
-
-## 要点
-
-- 命令中应该包含哪些信息
-
-没有绝对的答案
-
-- 保存历史纪录
-
-- 接口适配器
-
-实现接口，全部空实现
-
-## 相关
-
-- Composite 模式
-
-有时胡i使用 Composite 模式实现宏命令
-
-- Memento 模式
-
-有时会使用 Memento 模式来保存 Command 角色的历史记录
-
-- Protoype 模式
-
-有时会使用 Prototype 模式复制发生的事件
