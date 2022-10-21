@@ -2,8 +2,7 @@
 
 参考
 
-- 在线电子书 Refactoring[https://refactoringguru.cn/](https://refactoringguru.cn/)
-- 《图解设计模式》
+在线电子书 Refactoring[https://refactoringguru.cn/](https://refactoringguru.cn/)
 
 ## UML 一览
 
