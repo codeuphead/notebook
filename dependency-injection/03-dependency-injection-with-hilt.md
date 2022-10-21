@@ -455,22 +455,22 @@ Hilt 基于 Dagger，提供了一个标准的方式将 Dagger 应用到 Android 
 
 samples
 
-https://github.com/android/architecture-samples/tree/views-hilt
+[architecture-samples Hilt with Views](https://github.com/android/architecture-samples/tree/views-hilt)
 
-https://github.com/android/architecture-samples
+[architecture-samples Hilt with Compose](https://github.com/android/architecture-samples)
 
 codelabs
 
-https://codelabs.developers.google.com/codelabs/android-hilt/
+[Using Hilt in your Android app](https://codelabs.developers.google.com/codelabs/android-hilt/)
 
-https://codelabs.developers.google.com/codelabs/android-dagger-to-hilt/
+[Migrating your Dagger app to Hilt](https://codelabs.developers.google.com/codelabs/android-dagger-to-hilt/)
 
 blogs
 
-https://medium.com/androiddevelopers/dependency-injection-on-android-with-hilt-67b6031e62d
+[Dependency Injection on Android with Hilt](https://medium.com/androiddevelopers/dependency-injection-on-android-with-hilt-67b6031e62d)
 
-https://medium.com/androiddevelopers/scoping-in-android-and-hilt-c2e5222317c0
+[Scoping in Android and Hilt](https://medium.com/androiddevelopers/scoping-in-android-and-hilt-c2e5222317c0)
 
-https://medium.com/androiddevelopers/hilt-adding-components-to-the-hierarchy-96f207d6d92d
+[Adding components to the Hilt hierarchy](https://medium.com/androiddevelopers/hilt-adding-components-to-the-hierarchy-96f207d6d92d)
 
-https://medium.com/androiddevelopers/migrating-the-google-i-o-app-to-hilt-f3edf03affe5
+[Migrating the Google I/O app to Hilt](https://medium.com/androiddevelopers/migrating-the-google-i-o-app-to-hilt-f3edf03affe5)
